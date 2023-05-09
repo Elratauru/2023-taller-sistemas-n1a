@@ -243,7 +243,9 @@ function menuLogged() {
         5)
             saveFromFoundInDictionary $1
             ;;
-        6)  menuPrincipal
+            
+        6)  clear
+            menuPrincipal
             ;;
         *) echo "Opcion Invalida."
             menuLogged
