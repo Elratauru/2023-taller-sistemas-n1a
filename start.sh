@@ -4,6 +4,7 @@
 
 # Main Loop Function.
 function menuPrincipal {
+    clear
     echo "Bienvenido!"
     echo " "
     echo "1) Ingresar Usuario y Contraseña"
@@ -45,7 +46,7 @@ function addUser {
         ocurrencias=$(grep -i -c  "^$user" users.txt)
     done
     
-    read -p "Ingrese una contraseña: " pass
+    read -rsp "Ingrese una contraseña: " pass
     timestamp=$(date +%s);
     echo "$user:$pass:$timestamp" >> users.txt
     echo " "
@@ -58,7 +59,7 @@ function addUser {
 # Login Function, Reads an user and a pass and tries to authenticate through.
 function login {
     read -p "Ingrese su nombre de usuario: " user
-    read -p "Ingrese su contraseña: " pass
+    read -rsp  "Ingrese su contraseña: " pass
 
     if [ $(grep -c "^$user:$pass:" users.txt) = "1" ] 
     then
@@ -80,7 +81,7 @@ function login {
 # Params user
 function changePass {
     # Get the current Pass from the authenticated user.
-    actualpass= read -p "Ingrese contraseña actual del usuario $1: "
+    actualpass= read -rsp "Ingrese contraseña actual del usuario $1: "
 
     # Load the user password into function.
     currentPassword= getUserPassword $1
@@ -88,7 +89,7 @@ function changePass {
     # Check both.
     if [[ $actualpass == $currentPassword ]]
     then
-        read -p "Ingrese contraseña nueva para $1  " newpass
+        read -rsp "Ingrese contraseña nueva para $1  " newpass
 
         if [[ $1 == $currentPassword ]]
         then 
