@@ -185,7 +185,7 @@ function menuLogged() {
             readletter
             ;;
         3)
-            # Buscar en diccionario.txt
+            # Buscar en diccionario
             ;;
         4)
             letra= letter
