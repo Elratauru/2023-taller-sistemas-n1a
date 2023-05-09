@@ -51,7 +51,7 @@ function addUser {
     echo " "
     echo "Usuario $user creado exitosamente"
     sleep 2
-    clear
+    clear #Prueba que funcione git
     menuPrincipal
 }
 
