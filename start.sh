@@ -149,7 +149,7 @@ function updateLastSeen() {
 # Helper Function reads a letter and stores it.
 function readletter {
     clear
-    read -p "Ingrese una letra para almacenar " letter
+    read -p "Ingrese una letra para almacenar: " letter
     sleep 1
     clear
     menuLogged $letter
@@ -170,7 +170,7 @@ function menuLogged() {
     else echo "2) Escoger otra letra. Letra actual: $1" 
     fi
 
-    echo "3) Buscar palabras en el diccionario que finalicen con la letra escogida."
+    echo "3) Buscar palabras en el diccionario que finalicen con la letra actual."
     echo "4) Contar las palabras de la Opción 3."
     echo "5) Guardar las palabras en un archivo.txt, en conjunto con la fecha y hora de realizado el informe."
     echo "6) Volver al Menú Principal."
