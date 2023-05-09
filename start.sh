@@ -206,7 +206,7 @@ function menuLogged() {
      esac
 }
 
-# Main Menu loop.
+# Main Menu loop
 while true
 do
     menuPrincipal
