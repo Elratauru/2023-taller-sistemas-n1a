@@ -80,7 +80,7 @@ function login {
 # Params user
 function changePass {
     # Get the current Pass from the authenticated user.
-    actualpass= read -p "Ingrese contraseña actual del usuario $1 "
+    actualpass= read -p "Ingrese contraseña actual del usuario $1: "
 
     # Load the user password into function.
     currentPassword= getUserPassword $1
@@ -147,11 +147,61 @@ function updateLastSeen() {
 }
 
 # Helper Function reads a letter and stores it.
-function readletter {
+function readKeyword {
     clear
-    read -p "Ingrese una letra para almacenar: " letter
+    read -p "Ingrese una palabra clave para almacenar: " letter
     sleep 1
     clear
+    menuLogged $letter
+}
+
+# Validates that the keyword exists and is setup.
+function validateKeyword() {
+    if [ -z $1 ];
+    then 
+        echo "Necesitas una palabra clave para continuar."
+        sleep 2
+        menuLogged
+    fi
+}
+
+# Searches on dictionary.
+# Parameters $1 is the key
+function findInDictionary() {
+    validateKeyword $1
+
+    echo "Estas son las palabras que empiezan con $1: "
+    cat diccionario.txt | grep "\b$1\w*" --text | awk '{print $1}'
+
+    echo "Presiona cualquier tecla para continuar..."
+    read -n 1 -s
+
+    menuLogged $letter
+}
+
+# Counts Words on dictionary.
+# Parameters $1 is the key
+function countInDictionary() {
+    validateKeyword $1
+
+    echo "La cantidad de palabras encontradas que empieza con $1 son:"
+    cat diccionario.txt | grep "\b$1\w*" --text | awk '{print NR-1}' | wc -w
+
+    echo "Presiona cualquier tecla para continuar..."
+    read -n 1 -s
+
+    menuLogged $letter
+}
+
+# Counts Words on dictionary.
+# Parameters $1 is the key
+function saveFromFoundInDictionary() {
+    validateKeyword $1
+
+    echo "Guardando archivo.txt con las coincidencias..."
+    cat diccionario.txt | grep "\b$1\w*" --text | awk '{print $1}' | (echo -e "$(date): "; cat) > archivo.txt
+    sleep 2
+
     menuLogged $letter
 }
 
@@ -166,11 +216,11 @@ function menuLogged() {
     echo "1) Cambiar Contraseña."
 
     if [ -z $1 ];
-    then echo "2) Escoger una letra."
-    else echo "2) Escoger otra letra. Letra actual: $1" 
+    then echo "2) Escoger una palabra clave."
+    else echo "2) Cambiar la palabra clave. Palabra clave actual: $1" 
     fi
 
-    echo "3) Buscar palabras en el diccionario que finalicen con la letra actual."
+    echo "3) Buscar palabras en el diccionario que empiezen con la palabra clave actual."
     echo "4) Contar las palabras de la Opción 3."
     echo "5) Guardar las palabras en un archivo.txt, en conjunto con la fecha y hora de realizado el informe."
     echo "6) Volver al Menú Principal."
@@ -182,21 +232,16 @@ function menuLogged() {
             changePass $user
             ;;
         2)
-            readletter
+            readKeyword
             ;;
         3)
-            # Buscar en diccionario.txt
+            findInDictionary $1
             ;;
         4)
-            letra= letter
-            diccionario= "diccionario.txt"
-
-            countedWords = $(wordCounter "$letra" "$diccionario") 
-
-            echo "Hay $countedWords palabras que terminan en '$letra' en el diccionario." #averiguar si importan mayusculas
-
+            countInDictionary $1
             ;;
         5)
+            saveFromFoundInDictionary $1
             ;;
         6)  menu_principal
             ;;
