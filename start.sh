@@ -4,6 +4,9 @@
 
 # Main Loop Function.
 function menuPrincipal {
+    # This creates the file in case it doesn't exist.
+    [ -f users.txt ] || touch users.txt
+
     clear
     echo "Bienvenido!"
     echo " "
