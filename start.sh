@@ -87,7 +87,7 @@ function changePass {
     currentPassword= getUserPassword $1
 
     # Check both.
-    if [[ $actualpass == $currentPassword ]]
+    if [[ $actualpass = $currentPassword ]]
     then
         read -rsp "Ingrese contraseña nueva para $1  " newpass
 
