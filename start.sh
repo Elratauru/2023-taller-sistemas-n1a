@@ -165,7 +165,7 @@ function findInDictionary() {
     validateKeyword $1
 
     echo "Estas son las palabras que empiezan con $1: "
-    cat diccionario.txt | grep "\b$1\w*" --text | awk '{print $1}'
+    cat diccionario.txt | grep "^$1\w*" --text | awk '{print $1}'
 
     echo "Presiona cualquier tecla para continuar..."
     read -n 1 -s
@@ -179,7 +179,7 @@ function countInDictionary() {
     validateKeyword $1
 
     echo "La cantidad de palabras encontradas que empieza con $1 son:"
-    cat diccionario.txt | grep "\b$1\w*" --text | awk '{print NR-1}' | wc -w
+    cat diccionario.txt | grep "^$1\w*" --text | awk '{print NR-1}' | wc -w
 
     echo "Presiona cualquier tecla para continuar..."
     read -n 1 -s
@@ -193,7 +193,7 @@ function saveFromFoundInDictionary() {
     validateKeyword $1
 
     echo "Guardando archivo.txt con las coincidencias..."
-    cat diccionario.txt | grep "\b$1\w*" --text | awk '{print $1}' | (echo -e "$(date): "; cat) > archivo.txt
+    cat diccionario.txt | grep "^$1\w*" --text | awk '{print $1}' | (echo -e "$(date): "; cat) > archivo.txt
     sleep 2
 
     menuLogged $letter
