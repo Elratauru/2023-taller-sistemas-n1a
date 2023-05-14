@@ -81,24 +81,17 @@ function login {
 # Params user
 function changePass {
     # Get the current Pass from the authenticated user. test comit bacosta 
-    actualpass= read -rsp "Ingrese contraseña actual del usuario $1: "
+    read -rsp "Ingrese contraseña actual del usuario $1: " actualpass
 
     # Load the user password into function.
-    currentPassword= getUserPassword $1
+    currentPassword=$(getUserPassword $1)
 
     # Check both.
-    if [[ $actualpass = $currentPassword ]]
+    if [ $actualpass = $currentPassword ]
     then
         read -rsp "Ingrese contraseña nueva para $1  " newpass
 
-        if [[ $1 == $currentPassword ]]
-        then 
-            # For any cases that the user is equal to the pass...
-             sed -i "s/$1\:$(getUserPassword $1)/$1\:$newpass/2" users.txt
-        else
-            # Regular pass change.
-             sed -i "s/$1\:$(getUserPassword $1)/$1\:$newpass/" users.txt
-        fi
+        sed -i "s/$1\:$(getUserPassword $1)/$1\:$newpass/" users.txt     
 
         # Echo message and wait for a few secs.
         echo "La contraseña ha sido actualizada!"
