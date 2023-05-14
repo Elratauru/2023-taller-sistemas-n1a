@@ -1,6 +1,6 @@
 #!/bin/bash
-# Obligatorio 1 de Taller de Tecnologias
-# Bruno Acosta - Alfonso Carvallo - Mauricio Martinez.
+# Obligatorio 1 de Taller de Tecnologias 2023 N1A
+# Bruno Acosta 313080 - Alfonso Carvallo 250427 - Mauricio Martinez 255043.
 
 # Main Loop Function.
 function menuPrincipal {
