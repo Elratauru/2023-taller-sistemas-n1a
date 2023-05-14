@@ -114,16 +114,6 @@ function getUserPassword() {
     grep -i "^$1:" users.txt | cut -d ":" -f2
 }
 
-# TODO: Document this?
-function wordCounter() {
-  local letra=$1  
-  local diccionario=$2  
-
-  local cantidad=$(grep -c "$letra$" "$diccionario")
-  
-  echo "$cantidad" 
-}
-
 # Timestamp Function, Get the last seen.
 # Params user
 # Returns Timestamp.
