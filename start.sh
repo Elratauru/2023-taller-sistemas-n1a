@@ -1,6 +1,6 @@
 #!/bin/bash
 # Obligatorio 1 de Taller de Tecnologias
-# Bruno Acosta - Alfonso Carvallo - Mauricio Martinez.
+#  Bruno Acosta - Alfonso Carvallo - Mauricio Martinez.
 
 # Main Loop Function.
 function menuPrincipal {
