@@ -80,7 +80,7 @@ function login {
 # Change Password Main Function
 # Params user
 function changePass {
-    # Get the current Pass from the authenticated user.
+    # Get the current Pass from the authenticated user. test comit bacosta 
     actualpass= read -rsp "Ingrese contraseña actual del usuario $1: "
 
     # Load the user password into function.
